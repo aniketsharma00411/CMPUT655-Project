@@ -3,7 +3,8 @@
 ## Installation Instructions
 
 ```bash
-conda create --name python=3.9
+conda create --name rl_project python=3.9
+conda activate rl_project
 conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
 conda install jupyter
 pip install "popgym[baselines]"
