@@ -1,3 +1,5 @@
+# python initial_experiment/graphs.py ./initial_experiment <model-name>
+
 import json
 import matplotlib.pyplot as plt
 import os
