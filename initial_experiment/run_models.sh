@@ -11,10 +11,13 @@ source ~/miniconda3/etc/profile.d/conda.sh
 # echo "Running lstm"
 # conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/lstm/experiment.py ~/CMPUT655-Project/initial_experiment/lstm > ~/CMPUT655-Project/initial_experiment/lstm/output.log 2> ~/CMPUT655-Project/initial_experiment/lstm/error.log
 
-echo "Running transformer_wide_2"
-conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/transformer_wide_2/experiment.py ~/CMPUT655-Project/initial_experiment/transformer_wide_2 > ~/CMPUT655-Project/initial_experiment/transformer_wide_2/output.log 2> ~/CMPUT655-Project/initial_experiment/transformer_wide_2/error.log
+# echo "Running transformer_wide_2"
+# conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/transformer_wide_2/experiment.py ~/CMPUT655-Project/initial_experiment/transformer_wide_2 > ~/CMPUT655-Project/initial_experiment/transformer_wide_2/output.log 2> ~/CMPUT655-Project/initial_experiment/transformer_wide_2/error.log
 
-echo "Running lstm_2"
-conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/lstm_2/experiment.py ~/CMPUT655-Project/initial_experiment/lstm_2 > ~/CMPUT655-Project/initial_experiment/lstm_2/output.log 2> ~/CMPUT655-Project/initial_experiment/lstm_2/error.log
+# echo "Running lstm_2"
+# conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/lstm_2/experiment.py ~/CMPUT655-Project/initial_experiment/lstm_2 > ~/CMPUT655-Project/initial_experiment/lstm_2/output.log 2> ~/CMPUT655-Project/initial_experiment/lstm_2/error.log
+
+echo "Running gru"
+conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/gru/experiment.py ~/CMPUT655-Project/initial_experiment/gru > ~/CMPUT655-Project/initial_experiment/gru/output.log 2> ~/CMPUT655-Project/initial_experiment/gru/error.log
 
 echo "Ending script"
