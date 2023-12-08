@@ -1,4 +1,4 @@
-# python initial_experiment/graphs.py ./initial_experiment <model-name>
+# python initial_experiment/graphs_v0.py ./initial_experiment <model-name>
 
 import json
 import matplotlib.pyplot as plt

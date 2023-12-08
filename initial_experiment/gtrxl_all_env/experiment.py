@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/github/aniketsharma00411/CMPUT655-Project/blob/main/rl_project_experiment_structure.ipynb
 """
 
-import sys
-sys.path.append('/home/aniket7/CMPUT655-Project/custom_models')
 
 import ray
 from ray import tune
@@ -20,6 +18,7 @@ from gtrxl import GTrXLModel
 import os
 import pickle
 import json
+import sys
 
 import pprint
 import matplotlib.pyplot as plt

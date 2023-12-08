@@ -21,15 +21,15 @@ source ~/miniconda3/etc/profile.d/conda.sh
 # conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/gru/experiment.py ~/CMPUT655-Project/initial_experiment/gru > ~/CMPUT655-Project/initial_experiment/gru/output.log 2> ~/CMPUT655-Project/initial_experiment/gru/error.log
 
 echo "Running gru_all_env"
-conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/gru_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/gru_all_env > ~/CMPUT655-Project/initial_experiment/gru_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/gru_all_env/error.log
+conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/gru_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/gru_all_env 0 > ~/CMPUT655-Project/initial_experiment/gru_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/gru_all_env/error.log
 
 echo "Running lstm_all_env"
-conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/lstm_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/lstm_all_env > ~/CMPUT655-Project/initial_experiment/lstm_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/lstm_all_env/error.log
+conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/lstm_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/lstm_all_env 1 > ~/CMPUT655-Project/initial_experiment/lstm_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/lstm_all_env/error.log
 
-echo "Running linear_attention_all_env"
-conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/linear_attention_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/linear_attention_all_env > ~/CMPUT655-Project/initial_experiment/linear_attention_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/linear_attention_all_env/error.log
+echo "Running gtrxl_all_env"
+conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/gtrxl_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/gtrxl_all_env 2 > ~/CMPUT655-Project/initial_experiment/gtrxl_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/gtrxl_all_env/error.log
 
 echo "Running deep_linear_attention_all_env"
-conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env > ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env/error.log
+conda run -n rl_project --no-capture-output python3 ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env/experiment.py ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env 3 > ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env/output.log 2> ~/CMPUT655-Project/initial_experiment/deep_linear_attention_all_env/error.log
 
 echo "Ending script"
