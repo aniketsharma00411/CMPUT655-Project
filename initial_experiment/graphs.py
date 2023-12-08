@@ -25,3 +25,4 @@ if __name__ == '__main__':
         plt.ylabel('Average Reward per Episode')
         # plt.show()
         plt.savefig(os.path.join(path, f'{env} - {model_name}.png'))
+        plt.clf()

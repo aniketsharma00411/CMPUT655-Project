@@ -26,27 +26,29 @@ import time
 """# Configuration"""
 
 num_of_cycles = 1  # @param
-total_timesteps_per_cycle = 15e6  # @param
+total_timesteps_per_cycle = 1e7  # @param
+
+os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[2]
 
 ray.init()
 
 """# Defining Environments"""
 
-envs = ["LabyrinthEscapeEasy", "LabyrinthEscapeMedium", "LabyrinthEscapeHard",
-        "LabyrinthExploreEasy", "LabyrinthExploreMedium", "LabyrinthExploreHard"]
+envs = ["LabyrinthEscapeVeryEasy", "LabyrinthEscapeEasy", "LabyrinthEscapeAlmostEasy",
+        "LabyrinthExploreVeryEasy", "LabyrinthExploreEasy", "LabyrinthExploreAlmostEasy"]
 
 ray.tune.registry.register_env(
-    "LabyrinthEscapeEasy", lambda env_config: labyrinth_escape.LabyrinthEscapeEasy())
+    "LabyrinthEscapeVeryEasy", lambda env_config: labyrinth_escape.LabyrinthEscape(maze_dims=(8, 8)))
 ray.tune.registry.register_env(
-    "LabyrinthEscapeMedium", lambda env_config: labyrinth_escape.LabyrinthEscapeMedium())
+    "LabyrinthEscapeEasy", lambda env_config: labyrinth_escape.LabyrinthEscape(maze_dims=(10, 10)))
 ray.tune.registry.register_env(
-    "LabyrinthEscapeHard", lambda env_config: labyrinth_escape.LabyrinthEscapeHard())
+    "LabyrinthEscapeAlmostEasy", lambda env_config: labyrinth_escape.LabyrinthEscape(maze_dims=(12, 12)))
 ray.tune.registry.register_env(
-    "LabyrinthExploreEasy", lambda env_config: labyrinth_explore.LabyrinthExploreEasy())
+    "LabyrinthExploreVeryEasy", lambda env_config: labyrinth_explore.LabyrinthExplore(maze_dims=(8, 8)))
 ray.tune.registry.register_env(
-    "LabyrinthExploreMedium", lambda env_config: labyrinth_explore.LabyrinthExploreMedium())
+    "LabyrinthExploreEasy", lambda env_config: labyrinth_explore.LabyrinthExplore(maze_dims=(10, 10)))
 ray.tune.registry.register_env(
-    "LabyrinthExploreHard", lambda env_config: labyrinth_explore.LabyrinthExploreHard())
+    "LabyrinthExploreAlmostEasy", lambda env_config: labyrinth_explore.LabyrinthExplore(maze_dims=(12, 12)))
 
 """# Defining Model"""
 
@@ -55,7 +57,7 @@ model = DeepLinearAttention
 # Maximum episode length and backprop thru time truncation length
 bptt_cutoff = 1024
 # Hidden size of linear layers
-h = 128
+h = 256
 # Hidden size of memory
 h_memory = 256
 
@@ -94,10 +96,10 @@ model_config = {
 """# Running Experiments"""
 
 mean_reward_per_episode = {}
-timesteps_done = {}
+# timesteps_done = {}
 for env in envs:
     mean_reward_per_episode[env] = []
-    timesteps_done[env] = []
+    # timesteps_done[env] = []
 
 previous_checkpoint_path = None
 
@@ -105,7 +107,7 @@ total_timesteps = 0
 prev_env_timesteps = 0
 for cycle_count in range(num_of_cycles):
     for env in envs:
-        print(f'Starting Cycle {cycle_count} Environment {env}:')
+        print(f"Starting Cycle {cycle_count} Environment {env}:")
         num_splits = 1
         split_id = 1
         gpu_per_worker = 0.25
@@ -149,53 +151,56 @@ for cycle_count in range(num_of_cycles):
             "model": model_config
         }
 
+        start_time = time.time()
+
         trainer = PPOTrainer(env=env, config=config)
         # if previous_checkpoint_path is not None:
-        #     trainer.restore(previous_checkpoint_path+'/' +
+        #     trainer.restore(previous_checkpoint_path+"/" +
         #                     sorted(os.listdir(previous_checkpoint_path))[-1])
 
-        previous_checkpoint_path = f"saved_checkpoints/agent_cycle_{cycle_count}_env_{env}"
+        previous_checkpoint_path = f"{sys.argv[1]}/saved_checkpoints/agent_cycle_{cycle_count}_env_{env}"
         curr_env_timesteps = 0
         # variables to check whether algorithm has reached weight save points
         start_checkpoint = False
         midway_checkpoint = False
-
-        start_time = time.time()
         while curr_env_timesteps < total_timesteps_per_cycle:
             result = trainer.train()
 
-            mean_reward_per_episode[env].append(result['episode_reward_mean'])
             # pprint.pprint(result)
-            total_timesteps = result['timesteps_total']
-            curr_env_timesteps = total_timesteps - prev_env_timesteps
-            timesteps_done[env].append(curr_env_timesteps)
+            total_timesteps = result["timesteps_total"]
+            # curr_env_timesteps = total_timesteps - prev_env_timesteps
+            curr_env_timesteps = total_timesteps
+            mean_reward_per_episode[env].append(
+                (curr_env_timesteps, result["episode_reward_mean"]))
+            # timesteps_done[env].append(curr_env_timesteps)
 
             # save weights when training checkpoints are reached
             # 1 represents start checkpoint and 2 is midway checkpoint
             if not start_checkpoint and curr_env_timesteps > 0:
-                print('Saving weights: Timesteps ', curr_env_timesteps)
-                with open(f'saved_weights/weights_cycle_{cycle_count}_env_{env}_stage_1.pkl', 'wb') as f:
+                print("Saving weights: Timesteps ", curr_env_timesteps)
+                with open(f"{sys.argv[1]}/saved_weights/weights_cycle_{cycle_count}_env_{env}_stage_1.pkl", "wb") as f:
                     weights = trainer.get_weights()
                     pickle.dump(weights, f)
                 start_checkpoint = True
 
             if not midway_checkpoint and curr_env_timesteps >= total_timesteps_per_cycle / 2:
-                print('Saving weights: Timesteps ', curr_env_timesteps)
-                with open(f'saved_weights/weights_cycle_{cycle_count}_env_{env}_stage_2.pkl', 'wb') as f:
+                print("Saving weights: Timesteps ", curr_env_timesteps)
+                with open(f"{sys.argv[1]}/saved_weights/weights_cycle_{cycle_count}_env_{env}_stage_2.pkl", "wb") as f:
                     weights = trainer.get_weights()
                     pickle.dump(weights, f)
                 midway_checkpoint = True
+
+        with open(f"{sys.argv[1]}/time_taken.txt", "a") as f:
+            f.write(
+                f"Time Taken for {env}: {time.time()-start_time} seconds\n")
+
+        with open(f"{sys.argv[1]}/mean_reward_per_episode.json", "w") as f:
+            json.dump(mean_reward_per_episode, f, indent=4)
 
         trainer.save(previous_checkpoint_path)
 
         prev_env_timesteps = total_timesteps
 
-        print('\n\n')
+        print("\n\n")
 
 ray.shutdown()
-
-with open(f"{sys.argv[1]}/time_taken.txt", "w") as f:
-    f.write(f'Time Taken: {time.time()-start_time} seconds')
-
-with open('mean_reward_per_episode.json', 'w') as f:
-    json.dump(mean_reward_per_episode, f, indent=4)

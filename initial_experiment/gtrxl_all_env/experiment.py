@@ -7,17 +7,19 @@ Original file is located at
     https://colab.research.google.com/github/aniketsharma00411/CMPUT655-Project/blob/main/rl_project_experiment_structure.ipynb
 """
 
+import sys
+sys.path.append('/home/aniket7/CMPUT655-Project/custom_models')
+
 import ray
 from ray import tune
 from ray.rllib.agents.ppo import PPOTrainer
 from popgym.envs import labyrinth_escape, labyrinth_explore
 import torch
-from popgym.baselines.ray_models.ray_gru import GRU
+from gtrxl import GTrXLModel
 
 import os
 import pickle
 import json
-import sys
 
 import pprint
 import matplotlib.pyplot as plt
@@ -52,14 +54,14 @@ ray.tune.registry.register_env(
 
 """# Defining Model"""
 
-model = GRU
+model = GTrXLModel
 
 # Maximum episode length and backprop thru time truncation length
 bptt_cutoff = 1024
 # Hidden size of linear layers
 h = 128
 # Hidden size of memory
-h_memory = 256
+h_memory = 128
 
 model_config = {
     # Truncate sequences into no more than this many timesteps
