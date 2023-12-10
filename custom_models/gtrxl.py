@@ -46,13 +46,13 @@ class GTrXLModel(BaseModel):
 
         self.num_transformer_units = 1
         self.attention_dim = 128
-        self.num_heads = 4
+        self.num_heads = 2
         self.head_dim = 64
         self.max_seq_len = model_config["max_seq_len"]
         self.obs_dim = obs_space.shape[0]
         self.position_wise_mlp_dim = 64
         self.init_gru_gate_bias = 2.0
-        linear_layer = SlimFC(in_size=128, out_size=self.attention_dim)
+        linear_layer = nn.Identity()
 
         layers = [linear_layer]
 
@@ -66,7 +66,7 @@ class GTrXLModel(BaseModel):
                     num_heads=self.num_heads,
                     head_dim=self.head_dim,
                     input_layernorm=True,
-                    output_activation=nn.ReLU,
+                    output_activation=nn.LeakyReLU,
                 ),
                 fan_in_layer=GRUGate(self.attention_dim,
                                      self.init_gru_gate_bias),
@@ -79,13 +79,13 @@ class GTrXLModel(BaseModel):
                         in_size=self.attention_dim,
                         out_size=self.position_wise_mlp_dim,
                         use_bias=False,
-                        activation_fn=nn.ReLU,
+                        activation_fn=nn.LeakyReLU,
                     ),
                     SlimFC(
                         in_size=self.position_wise_mlp_dim,
                         out_size=self.attention_dim,
                         use_bias=False,
-                        activation_fn=nn.ReLU,
+                        activation_fn=nn.LeakyReLU,
                     ),
                 ),
                 fan_in_layer=GRUGate(self.attention_dim,

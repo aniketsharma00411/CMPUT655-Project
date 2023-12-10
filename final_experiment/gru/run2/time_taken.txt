@@ -1,0 +1,3 @@
+Time Taken for LabyrinthExploreEasy: 2741.943064928055 seconds
+Time Taken for LabyrinthEscapeAlmostEasy: 2918.1077094078064 seconds
+Time Taken for LabyrinthExploreVeryEasy: 2676.926104068756 seconds

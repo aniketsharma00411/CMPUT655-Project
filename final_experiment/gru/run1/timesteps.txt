@@ -1,0 +1,3 @@
+Timesteps completed in cycle 0 for environment LabyrinthExploreEasy = 10056989
+Timesteps completed in cycle 0 for environment LabyrinthEscapeAlmostEasy = 10063443
+Timesteps completed in cycle 0 for environment LabyrinthExploreVeryEasy = 10063156

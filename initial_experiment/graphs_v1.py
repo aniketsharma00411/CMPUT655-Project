@@ -23,10 +23,10 @@ if __name__ == '__main__':
     # exit()
 
     for env in mean_reward_per_episode.keys():
-        timestamps, avg_reward = zip(*mean_reward_per_episode[env])
-
-        if len(avg_reward) == 0:
+        if len(mean_reward_per_episode[env]) == 0:
             continue
+
+        timestamps, avg_reward = zip(*mean_reward_per_episode[env])
 
         plt.plot(timestamps, avg_reward)
         plt.title(f'{env} - {model_name}')

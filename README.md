@@ -2,6 +2,8 @@
 
 ## Installation Instructions
 
+### Local Installation
+
 ```bash
 conda create --name rl_project python=3.9
 conda activate rl_project
@@ -11,10 +13,10 @@ pip install "popgym[baselines]"
 pip install tensorflow_probability==0.20.0
 pip install mazelib
 conda install matplotlib
+cp custom_models/gtrxl.py ~/miniconda3/envs/rl_project/lib/python3.9/site-packages
 ```
 
-
-## Installation Instructions for Colab
+### Google Colab
 
 Run the following in a code cell before the rest of the project:
 
