@@ -153,9 +153,9 @@ for cycle_count in range(num_of_cycles):
         start_time = time.time()
 
         trainer = PPOTrainer(env=env, config=config)
-        # if previous_checkpoint_path is not None:
-        #     trainer.restore(previous_checkpoint_path+"/" +
-        #                     sorted(os.listdir(previous_checkpoint_path))[-1])
+        if previous_checkpoint_path is not None:
+            trainer.restore(previous_checkpoint_path+"/" +
+                            sorted(os.listdir(previous_checkpoint_path))[-1])
 
         previous_checkpoint_path = f"{sys.argv[1]}/saved_checkpoints/agent_cycle_{cycle_count}_env_{env}"
         curr_env_timesteps = 0

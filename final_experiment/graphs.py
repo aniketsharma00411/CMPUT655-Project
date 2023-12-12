@@ -1,4 +1,4 @@
-# python final_experiment/graphs.py ./final_experiment/run1 <model-name> <run>
+# python final_experiment/graphs.py ./final_experiment <model-name> <run>
 
 import json
 import matplotlib.pyplot as plt
@@ -19,10 +19,6 @@ if __name__ == '__main__':
     mean_reward_per_episode = load_json(os.path.join(
         path, model_name, run, 'mean_reward_per_episode.json'))
 
-    # print(mean_reward_per_episode)
-    # print()
-    # exit()
-
     for env in mean_reward_per_episode.keys():
         if len(mean_reward_per_episode[env]) == 0:
             continue
@@ -41,22 +37,22 @@ if __name__ == '__main__':
 
             modified_timestamps.append(timestamp+last_cycle_timestamp)
             last_timestamp = timestamp
-
-        # print(timestamps)
-        # print(avg_reward)
-        # exit()
+        change_color_points.append(
+            (last_cycle_timestamp, last_timestamp+last_cycle_timestamp))
 
         plt.plot(modified_timestamps, avg_reward)
         plt.title(f'{env} - {model_name}')
+
         even = False
         for change_color_point in change_color_points:
             if even:
                 plt.axvspan(
                     change_color_point[0], change_color_point[1], color='grey', alpha=0.3)
             even = not even
-        plt.xlabel('Iterations')
+
+        plt.ylim((-1, 1))
+        plt.xlabel('Timesteps')
         plt.ylabel('Average Reward per Episode')
-        # plt.show()
         plt.savefig(os.path.join(path, model_name, run,
                     f'graphs/{env} - {model_name}.png'))
         plt.clf()
