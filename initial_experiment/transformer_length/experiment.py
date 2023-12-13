@@ -98,17 +98,17 @@ for cycle_count in range(num_of_cycles):
             curr_env_timesteps = total_timesteps - prev_env_timesteps
             timesteps_done[env].append(curr_env_timesteps)
 
-            # save weights when training checkpoints are reached
+            # save gru_sample_weights when training checkpoints are reached
             # 1 represents start checkpoint and 2 is midway checkpoint
             if not start_checkpoint and curr_env_timesteps > 0:
-                print("Saving weights: Timesteps ", curr_env_timesteps)
+                print("Saving gru_sample_weights: Timesteps ", curr_env_timesteps)
                 with open(f"{sys.argv[1]}/saved_weights/weights_cycle_{cycle_count}_env_{env}_stage_1.pkl", "wb") as f:
                     weights = trainer.get_weights()
                     pickle.dump(weights, f)
                 start_checkpoint = True
 
             if not midway_checkpoint and curr_env_timesteps >= total_timesteps_per_cycle / 2:
-                print("Saving weights: Timesteps ", curr_env_timesteps)
+                print("Saving gru_sample_weights: Timesteps ", curr_env_timesteps)
                 with open(f"{sys.argv[1]}/saved_weights/weights_cycle_{cycle_count}_env_{env}_stage_2.pkl", "wb") as f:
                     weights = trainer.get_weights()
                     pickle.dump(weights, f)
