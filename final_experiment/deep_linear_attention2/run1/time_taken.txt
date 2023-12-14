@@ -46,3 +46,15 @@ Time Taken for LabyrinthExploreAlmostEasy: 3087.1889266967773 seconds
 Time Taken for LabyrinthEscapeEasy: 4047.619245290756 seconds
 Time Taken for LabyrinthExploreMedium: 2864.697497844696 seconds
 Time Taken for LabyrinthEscapeAlmostEasy: 3810.6265609264374 seconds
+Time Taken for LabyrinthExploreEasy: 3482.7653243541718 seconds
+Time Taken for LabyrinthEscapeMedium: 3523.6010658740997 seconds
+Time Taken for LabyrinthExploreAlmostEasy: 3050.409294605255 seconds
+Time Taken for LabyrinthEscapeEasy: 3665.0144488811493 seconds
+Time Taken for LabyrinthExploreMedium: 2907.4165201187134 seconds
+Time Taken for LabyrinthEscapeAlmostEasy: 3690.10027551651 seconds
+Time Taken for LabyrinthExploreEasy: 3305.026624441147 seconds
+Time Taken for LabyrinthEscapeMedium: 3537.2598960399628 seconds
+Time Taken for LabyrinthExploreAlmostEasy: 2955.9489595890045 seconds
+Time Taken for LabyrinthEscapeEasy: 3867.145329475403 seconds
+Time Taken for LabyrinthExploreMedium: 2915.667976617813 seconds
+Time Taken for LabyrinthEscapeAlmostEasy: 4007.8033304214478 seconds
