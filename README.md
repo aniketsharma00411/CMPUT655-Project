@@ -26,7 +26,8 @@ Run the following in a code cell before the rest of the project:
 !pip install -r mazelib/requirements.txt
 !pip install mazelib/
 ```
-In the repository directory, there are three ipynb files :
+### In the repository directory, there are three python notebook files :
+
 1. Random_Agent_of_RL_env: Runs and saves the performance of a Random action agent on 100 seeds for all the required different environments.
    
 2. pop_gym_env_exploration: Looks at some parts of the POPGym environments and prints out some detailed information for our exploration of the parts of the environments.
