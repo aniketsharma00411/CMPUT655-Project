@@ -22,8 +22,8 @@ if __name__ == '__main__':
     model_names = {
         "gru_8_10_12": "GRU",
         "gru_10_12_14": "GRU",
-        "fart_8_10_12_14": "FART",
-        "fart_10_12_14": "FART"
+        "wfart_8_10_12": "WFART",
+        "wfart_10_12_14": "WFART"
     }
 
     env_names = {
@@ -61,7 +61,7 @@ if __name__ == '__main__':
             (last_cycle_timestamp, last_timestamp+last_cycle_timestamp))
 
         plt.plot(modified_timestamps, avg_reward)
-        plt.title(f'{env_names[env]} - {model_names[model_name]}')
+        plt.title(f'{env_names[env]} - ${model_names[model_name]}$')
 
         even = False
         for change_color_point in change_color_points:
