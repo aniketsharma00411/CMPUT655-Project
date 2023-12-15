@@ -19,7 +19,7 @@ if __name__ == "__main__":
         "gru_8_10_12": "GRU",
         "lstm3_8_10_12": "LSTM_3",
         "wfart_8_10_12": "WFART",
-        "ngtrxl2_8_10_12": "NGTrXL_2"
+        "wgtrxl3_8_10_12": "WGTrXL_3"
     }
 
     env_names = {
@@ -39,7 +39,7 @@ if __name__ == "__main__":
             "LabyrinthExploreVeryEasy", "LabyrinthExploreEasy", "LabyrinthExploreAlmostEasy"]
 
     for env in envs:
-        for model_name in ["gru_8_10_12", "lstm3_8_10_12", "wfart_8_10_12", "ngtrxl2_8_10_12"]:
+        for model_name in ["gru_8_10_12", "lstm3_8_10_12", "wfart_8_10_12", "wgtrxl3_8_10_12"]:
 
             mean_reward_per_episode = load_json(os.path.join(
                 'initial_experiment', model_name, "mean_reward_per_episode.json"))
