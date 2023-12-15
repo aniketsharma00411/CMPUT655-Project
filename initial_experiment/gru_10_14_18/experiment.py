@@ -12,7 +12,7 @@ from ray import tune
 from ray.rllib.agents.ppo import PPOTrainer
 from popgym.envs import labyrinth_escape, labyrinth_explore
 import torch
-from popgym.baselines.ray_models.ray_lstm import LSTM
+from popgym.baselines.ray_models.ray_gru import GRU
 
 import os
 import pickle
@@ -34,25 +34,25 @@ ray.init()
 
 """# Defining Environments"""
 
-envs = ["LabyrinthEscapeVeryEasy", "LabyrinthEscapeEasy", "LabyrinthEscapeAlmostEasy",
-        "LabyrinthExploreVeryEasy", "LabyrinthExploreEasy", "LabyrinthExploreAlmostEasy"]
+envs = ["LabyrinthEscapeEasy", "LabyrinthEscapeMedium", "LabyrinthEscapeHard",
+        "LabyrinthExploreEasy", "LabyrinthExploreMedium", "LabyrinthExploreHard"]
 
 ray.tune.registry.register_env(
-    "LabyrinthEscapeVeryEasy", lambda env_config: labyrinth_escape.LabyrinthEscape(maze_dims=(8, 8)))
+    "LabyrinthEscapeEasy", lambda env_config: labyrinth_escape.LabyrinthEscapeEasy)
 ray.tune.registry.register_env(
-    "LabyrinthEscapeEasy", lambda env_config: labyrinth_escape.LabyrinthEscape(maze_dims=(10, 10)))
+    "LabyrinthEscapeMedium", lambda env_config: labyrinth_escape.LabyrinthEscapeMedium)
 ray.tune.registry.register_env(
-    "LabyrinthEscapeAlmostEasy", lambda env_config: labyrinth_escape.LabyrinthEscape(maze_dims=(12, 12)))
+    "LabyrinthEscapeHard", lambda env_config: labyrinth_escape.LabyrinthEscapeHard)
 ray.tune.registry.register_env(
-    "LabyrinthExploreVeryEasy", lambda env_config: labyrinth_explore.LabyrinthExplore(maze_dims=(8, 8)))
+    "LabyrinthExploreEasy", lambda env_config: labyrinth_explore.LabyrinthExploreEasy)
 ray.tune.registry.register_env(
-    "LabyrinthExploreEasy", lambda env_config: labyrinth_explore.LabyrinthExplore(maze_dims=(10, 10)))
+    "LabyrinthExploreMedium", lambda env_config: labyrinth_explore.LabyrinthExploreMedium)
 ray.tune.registry.register_env(
-    "LabyrinthExploreAlmostEasy", lambda env_config: labyrinth_explore.LabyrinthExplore(maze_dims=(12, 12)))
+    "LabyrinthExploreHard", lambda env_config: labyrinth_explore.LabyrinthExploreHard)
 
 """# Defining Model"""
 
-model = LSTM
+model = GRU
 
 # Maximum episode length and backprop thru time truncation length
 bptt_cutoff = 1024

@@ -17,10 +17,6 @@ if __name__ == '__main__':
 
     mean_reward_per_episode = load_json(os.path.join(
         path, model_name, 'mean_reward_per_episode.json'))
-    
-    # print(mean_reward_per_episode)
-    # print()
-    # exit()
 
     for env in mean_reward_per_episode.keys():
         if len(mean_reward_per_episode[env]) == 0:
@@ -30,8 +26,10 @@ if __name__ == '__main__':
 
         plt.plot(timestamps, avg_reward)
         plt.title(f'{env} - {model_name}')
+        plt.ylim((-1, 1))
         plt.xlabel('Iterations')
         plt.ylabel('Average Reward per Episode')
         # plt.show()
-        plt.savefig(os.path.join(path, model_name, f'graphs/{env} - {model_name}.png'))
+        plt.savefig(os.path.join(path, model_name,
+                    f'graphs/{env} - {model_name}.png'))
         plt.clf()
