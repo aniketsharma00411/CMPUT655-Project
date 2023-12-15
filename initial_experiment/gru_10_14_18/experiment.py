@@ -26,7 +26,7 @@ import time
 """# Configuration"""
 
 num_of_cycles = 1  # @param
-total_timesteps_per_cycle = 1e7  # @param
+total_timesteps_per_cycle = 15e6  # @param
 
 os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[2]
 
