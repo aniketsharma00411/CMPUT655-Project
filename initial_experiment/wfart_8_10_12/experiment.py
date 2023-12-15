@@ -57,7 +57,7 @@ model = DeepLinearAttention
 # Maximum episode length and backprop thru time truncation length
 bptt_cutoff = 1024
 # Hidden size of linear layers
-h = 256
+h = 320
 # Hidden size of memory
 h_memory = 256
 
@@ -69,6 +69,7 @@ model_config = {
     # Config passed to custom model constructor
     # see base_model.py to see how these are used
     "custom_model_config": {
+        "num_layers": 1,
         "preprocessor_input_size": h,
         "preprocessor": torch.nn.Sequential(
             torch.nn.Linear(h, h),
