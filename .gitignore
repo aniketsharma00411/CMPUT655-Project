@@ -162,3 +162,5 @@ cython_debug/
 .DS_Store
 
 
+/weight_change_plots/plots_for_weight_change/
+/weight_change_plots/gru_sample_weights/

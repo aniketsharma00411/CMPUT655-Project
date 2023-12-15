@@ -121,7 +121,7 @@ def main(cycle_count, weights_folder_pth, envs_list):
                 break
         plot_weight_change(env_l2_norm_dict_list, env)
 if __name__ == '__main__':
-    main(cycle_count=3,
+    main(cycle_count=4,
          weights_folder_pth="/Users/srinjoybhuiya/PycharmProjects/CMPUT655-Project/final_experiment/gru/run2/saved_weights",
          envs_list=["LabyrinthEscapeAlmostEasy", "LabyrinthEscapeEasy", "LabyrinthEscapeVeryEasy"])
 
