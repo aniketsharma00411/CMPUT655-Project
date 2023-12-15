@@ -46,6 +46,26 @@ def plot_weight_change(env_l2_norm_dict_list, env):
     critic_l2_norms = []
     preprocessor_l2_norms = []
 
+    model_names = {
+        "gru_8_10_12": "GRU",
+        "gru_10_12_14": "GRU",
+        "wfart_8_10_12": "WFART",
+        "wfart_10_12_14": "WFART"
+    }
+
+    env_names = {
+        "LabyrinthEscapeVeryEasy": "LabyrinthEscape_8",
+        "LabyrinthEscapeEasy": "LabyrinthEscape_10",
+        "LabyrinthEscapeAlmostEasy": "LabyrinthEscape_12",
+        "LabyrinthEscapeMedium": "LabyrinthEscape_14",
+        "LabyrinthEscapeHard": "LabyrinthEscape_18",
+        "LabyrinthExploreVeryEasy": "LabyrinthExplore_8",
+        "LabyrinthExploreEasy": "LabyrinthExplore_10",
+        "LabyrinthExploreAlmostEasy": "LabyrinthExplore_12",
+        "LabyrinthExploreMedium": "LabyrinthExplore_14",
+        "LabyrinthExploreHard": "LabyrinthExplore_18"
+    }
+
     for l2_norm in env_l2_norm_dict_list:
         for key in l2_norm.keys():
             if key == "core":
@@ -63,23 +83,23 @@ def plot_weight_change(env_l2_norm_dict_list, env):
     lst_of_wight_types = ["total ", "core", "actor", "critic", "preprocessor"]
 
     for _, x in enumerate([total_l2_norms, core_l2_norms, actor_l2_norms, critic_l2_norms, preprocessor_l2_norms]):
-
         # normalize the l2_norms with the first l2_norm in x to be the 1
         x = np.array(x)
         x = x / x[0]
 
         plt.plot(range(1, len(x) + 1), x, marker="o",
                  markersize=3, linewidth=1)
-        plt.xlabel("Visit Number")
-        plt.ylabel("Weights")
+        plt.xlabel("Visit")
+        plt.ylabel("Normalized $l_2$ norm")
 
         plt.xticks(range(1, len(x) + 1))
-        # add a legend where the first argument is the label and the second is the color
-    plt.title(f"Weight Change L2 Norm for {env} - {model_name}")
-    plt.ylim((0, 1.5))
-    plt.legend(lst_of_wight_types, loc="upper right")
+
+    plt.title(f"{env_names[env]} - ${model_names[model_name]}$")
+    plt.ylim((0, 2.2))
+    plt.xlim(xmin=1)
+    plt.legend(lst_of_wight_types)
     plt.savefig(os.path.join(
-        path, model_name, run, "weight_change_graphs", f"weight_change_l2_norm_{env}.png"))
+        path, model_name, run, "weight_change_graphs", f"weight_{env_names[env]}_{model_names[model_name]}.png"))
     plt.close()
 
 
@@ -140,6 +160,8 @@ if __name__ == '__main__':
 
     envs = ["LabyrinthExploreEasy", "LabyrinthEscapeMedium", "LabyrinthExploreAlmostEasy",
             "LabyrinthEscapeEasy", "LabyrinthExploreMedium", "LabyrinthEscapeAlmostEasy"]
+    # envs = ["LabyrinthExploreEasy", "LabyrinthEscapeVeryEasy", "LabyrinthExploreAlmostEasy",
+    #         "LabyrinthEscapeEasy", "LabyrinthExploreVeryEasy", "LabyrinthEscapeAlmostEasy"]
     main(
         num_of_cycles=10,
         weights_folder_pth=os.path.join(
