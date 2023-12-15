@@ -19,10 +19,10 @@ if __name__ == '__main__':
         path, model_name, 'mean_reward_per_episode.json'))
 
     for env in mean_reward_per_episode.keys():
-        plt.plot(mean_reward_per_episode[env])
+        plt.plot(range(65536, int(15e6), 65536), mean_reward_per_episode[env])
         plt.title(f'{env} - {model_name}')
-        plt.xlabel('Iterations')
+        plt.xlabel('Timesteps')
         plt.ylabel('Average Reward per Episode')
-        # plt.show()
-        plt.savefig(os.path.join(path, f'{env} - {model_name}.png'))
+        plt.savefig(os.path.join(path, model_name, 'graphs',
+                    f'{env} - {model_name}.png'))
         plt.clf()
