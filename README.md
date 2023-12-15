@@ -26,7 +26,7 @@ Run the following in a code cell before the rest of the project:
 !pip install -r mazelib/requirements.txt
 !pip install mazelib/
 ```
-### In the repository directory, there are three python notebook files :
+## In the repository directory, there are three python notebook files :
 
 1. Random_Agent_of_RL_env: Runs and saves the performance of a Random action agent on 100 seeds for all the required different environments.
    
@@ -36,7 +36,7 @@ Run the following in a code cell before the rest of the project:
 
 These files are supposed to be run in Google Collab and they perform various tasks not related to the training of the model on different tasks directly. 
 
-### Other than those there are 3 folders 
+## Other than those there are 3 folders 
 1. custom_models: Contains a modified GTRXL model code which we use in some initial experiments. 
 2. final_experiment: Contains the final results of the GRU and FART(fast autoregressive transformers) based agent along with all our graphs and plots.
 3. Initial experiments: Contains results of all the several different models run during our initial testing
