@@ -1,4 +1,4 @@
-# Do transformers and recurrent neural networks loose plasticity in partially observable reinforcement learning tasks?
+# Do transformers and recurrent neural networks lose plasticity in partially observable reinforcement learning tasks?
 
 Reinforcement Learning project for [CMPUT 655: Reinforcement Learning I](https://apps.ualberta.ca/catalogue/course/cmput/655)
 
